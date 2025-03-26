@@ -9,5 +9,13 @@ export const getAllProducts = () => {
 }
 
 export const getProduct = (id) => {
-    return productApi.get('/', id)
+    return productApi.get('/', {
+        params: { id }
+    })
+}
+
+export const getProductsByCategory = (category) => {
+    return productApi.get('/', {
+        params: { category }
+    })
 }

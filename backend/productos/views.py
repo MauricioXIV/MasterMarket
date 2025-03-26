@@ -6,4 +6,16 @@ from .models import Product
 
 class ProductView(viewsets.ModelViewSet):
     serializer_class = ProductSerializer
-    queryset = Product.objects.all()
+
+    def get_queryset(self):
+        queryset = Product.objects.all()
+        id = self.request.query_params.get('id')
+        category = self.request.query_params.get('category')
+
+        if id:
+            queryset = queryset.filter(id=id)
+
+        if category:
+            queryset = queryset.filter(category=category)
+
+        return queryset
