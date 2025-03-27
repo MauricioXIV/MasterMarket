@@ -3,6 +3,7 @@ import { getUser } from '../api/login.api';
 import { useNavigate } from 'react-router-dom'
 
 const PerfilPage = () => {
+  
   const [userData, setUserData] = useState({
     first_name: 'Juan',
     last_name: 'Pérez García',
@@ -23,7 +24,7 @@ const PerfilPage = () => {
   }, [])
 
   return (
-    <div className="max-w-md mx-auto my-8 p-8 pt-4 rounded-xl shadow-md bg-white font-sans">
+    <div className="max-w-md mx-auto my-8 p-8 pt-4 rounded-xl shadow-xl border-2 shadow-gray-400 bg-white font-sans">
       <div className='text-center m-0 text-2xl font-semibold text-gray-800 mb-4 pb-2 border-b border-gray-200'>Mi perfil</div>
       <div className="flex items-center mb-6">
         <img 

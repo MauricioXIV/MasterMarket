@@ -1,17 +1,31 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { CartContext } from '../context/CartContext';
 import { useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast'
+import { getUser } from '../api/login.api';
 
 const CompraPage = () => {
 
-  const { carrito, totalCarrito, vaciarCarrito1 } = useContext(CartContext)
+  const { carrito, totalCarrito, setRecibir, setDinero } = useContext(CartContext)
 
   const navigate = useNavigate()
 
-  const handleComprobante = () => {
+  useEffect(() => {
+      async function solicitarPerfil() {
+        const res = await getUser()
+        console.log(res.data.coins)
+        const money = res.data.coins - totalCarrito()
+        setDinero(money)
+      }
+      solicitarPerfil()
+    }, [])
+
+  const handleComprobante = (e) => {
+    e.preventDefault();
+    console.log('Datos enviados:', formData);
+    setRecibir(formData.receiveOption)
+    
     if (carrito.length > 0) {
-    vaciarCarrito1()
     toast.success("Compra realizada con éxito", {
       position: "bottom-right",
       style: {
@@ -32,7 +46,6 @@ const CompraPage = () => {
     }
   }
 
-
   const [formData, setFormData] = useState({
     paymentMethod: '',
     receiveOption: ''
@@ -52,9 +65,9 @@ const CompraPage = () => {
   };
 
   return (
-    <div className="text-white border-4 w-1/3 rounded-xl flex-wrap flex-col justify-center">
+    <div className="text-black border-4 w-1/3 rounded-xl flex-wrap flex-col justify-center shadow-gray-500 shadow-lg mt-8">
     <div className='flex'>
-      <h2 className=" w-full text-3xl justify-self-center bg-blue-900 rounded-lg border-b-4 border-gray-500-600 shadow-2xl text-center">Finalizar Compra</h2>
+      <h2 className=" w-full text-3xl justify-self-center bg-yellow-200 rounded-lg border-b-4 border-gray-500-600 shadow-2xl text-center text-yellow-500 font-semibold">Finalizar Compra</h2>
       </div>
       <form onSubmit={handleSubmit}>
         <div className="mb-4">
@@ -71,7 +84,6 @@ const CompraPage = () => {
           >
             <option className='text-black' value="">Seleccione un método</option>
             <option className='text-black' value="MP Coin">MP Coin</option>
-            <option className='text-black' value="Dólares">Dólares</option>
           </select>
         </div>
 

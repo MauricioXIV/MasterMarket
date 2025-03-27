@@ -24,19 +24,19 @@ function Navigation() {
 
 
     return (
-        <div className="bg-indigo-600 flex flex-wrap items-center w-full py-3 border-b-4 border-gray-500-600 shadow-2xl p-6 rounded-lg font-extrabold text-xl">
-        <h1 className="font-bold text-4xl flex w-1/3 mb-4">MercadoPreso</h1>
-        <div className="text-end">
-            <ul className="flex flex-wrap justify-self-end">
-                <Link to="/login/nosotros" className="w-1/6">Nosotros</Link>
-                <Link to="/login/productos" className="w-1/6 pr-4">Inicio</Link>
-                <CartWidget className="w-1/6" />
-                <Link to="/login/productos/hogar" className="w-1/6">Para el hogar</Link>
-                <Link to="/login/productos/tecnologia" className="w-1/6">Tecnología</Link>
-                <Link to="/login/productos/outfit" className="w-1/6">Outfit</Link>
-                <div className="flex flex-wrap w-full text-center mr-20">
-                <Link to="/login/perfil" className="w-1/2 justify-self-center">Mi perfil</Link>
-                <Link to="/login" className=" w-1/2">Cerrar sesión</Link>
+        <div className="w-full border-b-8 text-xl h-1/5 flex items-center border-gray-200  shadow-xl shadow-slate-400 justify-between rounded-lg flex-wrap">
+        <h1 className="font-bold text-4xl flex w-1/2 mb-4">Master Market</h1>
+        <div className="w-1/2">
+            <ul className="flex flex-wrap justify-self-end mt-3 text-yellow-400 rounded-md font-bold">
+                <Link to="/login/nosotros" className="w-1/6 shadow-lg  shadow-slate-400 border-2 h-1/2 text-center mr-3">Nosotros</Link>
+                <Link to="/login/productos" className="w-1/6 shadow-lg  shadow-slate-400 border-2 h-1/2 text-center mr-3">Inicio</Link>
+                <Link to="/login/productos/hogar" className="w-1/6 shadow-lg  shadow-slate-400 border-2 h-1/2 text-center mr-3">Para el hogar</Link>
+                <Link to="/login/productos/tecnologia" className="w-1/6 shadow-lg  shadow-slate-400 border-2 h-1/2 text-center mr-3">Tecnología</Link>
+                <Link to="/login/productos/outfit" className="w-1/6 shadow-lg  shadow-slate-400 border-2 h-1/2 text-center ">Outfit</Link>
+                <div className="flex flex-wrap w-full justify-between mr-20 mt-6">
+                <Link to="/login/perfil" className="w-1/3 shadow-lg  shadow-slate-400 border-2 h-1/2 text-center mr-3">Mi perfil</Link>
+                <Link to="/login" className="w-1/3 shadow-lg  shadow-slate-400 border-2 h-1/2 text-center mr-3">Cerrar sesión</Link>
+                <CartWidget className="w-1/3 shadow-lg  shadow-slate-400 border-2 h-1/2 text-center mr-3" />
                 </div>
             </ul>
         </div>

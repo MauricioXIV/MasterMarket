@@ -31,8 +31,9 @@ const ProductsList = () => {
     },[category])
 
     return (
-        <div><h1 className="text-zinc-50 text-3xl font-extrabold">{titulo}</h1>
-        <div className="text-white flex space-x-8 space-y-6 justify-center flex-wrap p-5">
+        <div><h1 className="text-zinc-900 text-3xl font-extrabold mb-4 mt-3">{titulo}</h1>
+        <div className="flex space-x-12 space-y-12 justify-center flex-wrap p-5 border-4 border-gray-300 shadow-xl mb-32">
+
             {
                 products.map((res) => (
                     <Product key={res.id} product={res} />

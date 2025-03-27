@@ -9,6 +9,10 @@ const carritoInicial = JSON.parse(localStorage.getItem("carrito"))  || []
 
 export const CartProvider = ({ children }) => {
 
+    const [recibir, setRecibir] = useState("")
+
+    const [dinero, setDinero] = useState(0)
+
     const [carrito, setCarrito] = useState(carritoInicial)
 
     const agregarAlCarrito = (product, cantidad) => {
@@ -71,6 +75,7 @@ export const CartProvider = ({ children }) => {
         return carrito.reduce((acc, prod) => acc + prod.price * prod.cantidad, 0)
     }
 
+
     useEffect(() => {
         localStorage.setItem("carrito", JSON.stringify(carrito))
     }, [carrito])
@@ -83,6 +88,10 @@ export const CartProvider = ({ children }) => {
             vaciarCarrito,
             vaciarCarrito1,
             totalCarrito,
+            recibir,
+            setRecibir,
+            dinero,
+            setDinero,
         }}>
         {children}
         </CartContext.Provider>
