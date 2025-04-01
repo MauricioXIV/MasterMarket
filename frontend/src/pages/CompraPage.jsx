@@ -3,10 +3,12 @@ import { CartContext } from '../context/CartContext';
 import { useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast'
 import { getUser } from '../api/login.api';
+import { postCarrito } from '../api/compras.api';
 
 const CompraPage = () => {
 
   const { carrito, totalCarrito, setRecibir, setDinero } = useContext(CartContext)
+  const [aidi, setAidi] = useState('')
 
   const navigate = useNavigate()
 
@@ -16,6 +18,9 @@ const CompraPage = () => {
         console.log(res.data.coins)
         const money = res.data.coins - totalCarrito()
         setDinero(money)
+        const aidi = res.data.id
+        setAidi(aidi)
+        console.log(aidi)
       }
       solicitarPerfil()
     }, [])
@@ -24,26 +29,51 @@ const CompraPage = () => {
     e.preventDefault();
     console.log('Datos enviados:', formData);
     setRecibir(formData.receiveOption)
-    
+
     if (carrito.length > 0) {
-    toast.success("Compra realizada con éxito", {
-      position: "bottom-right",
-      style: {
-        background: "#101010",
-        color: "#fff",
-        fontSize: "25px"
-      }
-    })
-    navigate("/login/compra/comprobante")} else {
-      toast.error("El carrito está vacío", {
-        position: "bottom-right",
-        style: {
-          background: "#fb3b1b",
-          color: "#fff",
-          fontSize: "25px"
+     async function agregarCompra() {
+        const itemsCarrito = Object.values(carrito).map((item) => ({
+          title: item.title,
+          description: item.description,
+          category: item.category,
+          price: item.price,
+          stock: item.stock,
+          image: item.image,
+        }))
+        const data = {
+          user: aidi,
+          items: itemsCarrito,
+          total: totalCarrito()
         }
-      })
-    }
+        console.log(carrito[0].title)
+        console.log(data)
+        const res2 = await postCarrito(data)
+          if (res2.status === 200 || res2.status === 201) {
+            console.log('Compra exitosa:', res2.data);
+          } else {
+            console.error('Error al realizar la compra:', res2);
+          }
+        }
+      agregarCompra()
+        toast.success("Compra realizada con éxito", {
+          position: "bottom-right",
+          style: {
+            background: "#101010",
+            color: "#fff",
+            fontSize: "25px"
+          }
+          })
+          navigate("/login/compra/comprobante")} 
+          else {
+            toast.error("El carrito está vacío", {
+              position: "bottom-right",
+              style: {
+                background: "#fb3b1b",
+                color: "#fff",
+                fontSize: "25px"
+            }
+        })
+        }
   }
 
   const [formData, setFormData] = useState({
@@ -65,7 +95,7 @@ const CompraPage = () => {
   };
 
   return (
-    <div className="text-black border-4 w-1/3 rounded-xl flex-wrap flex-col justify-center shadow-gray-500 shadow-lg mt-8">
+    <div className="text-black border-4 w-1/3 min-w-[350px] rounded-xl flex-wrap flex-col justify-center shadow-gray-500 shadow-lg mt-8">
     <div className='flex'>
       <h2 className=" w-full text-3xl justify-self-center bg-yellow-200 rounded-lg border-b-4 border-gray-500-600 shadow-2xl text-center text-yellow-500 font-semibold">Finalizar Compra</h2>
       </div>
@@ -83,7 +113,7 @@ const CompraPage = () => {
             required
           >
             <option className='text-black' value="">Seleccione un método</option>
-            <option className='text-black' value="MP Coin">MP Coin</option>
+            <option className='text-black' value="MP Coin">MM Coin</option>
           </select>
         </div>
 

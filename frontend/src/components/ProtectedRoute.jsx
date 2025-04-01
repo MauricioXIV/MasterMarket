@@ -1,6 +1,5 @@
 import { useEffect } from 'react';
 import { useNavigate, Outlet } from 'react-router-dom';
-import { toast } from 'react-hot-toast'
 
 const ProtectedRoute = () => {
   const navigate = useNavigate();

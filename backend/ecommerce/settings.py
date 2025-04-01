@@ -53,7 +53,8 @@ INSTALLED_APPS = [
     'coreapi',
     'productos',
     'djoser',
-    'rest_framework_simplejwt'
+    'rest_framework_simplejwt',
+    'compras',
 ]
 
 MIDDLEWARE = [
@@ -145,6 +146,12 @@ CORS_ALLOWED_ORIGINS = [
     "https://bestoappdetareas.netlify.app"
 ]
 
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
+
+CSRF_TRUSTED_ORIGINS = [
+    'http://127.0.0.1:5173',
+]
+
 REST_FRAMEWORK = {
     'DEFAULT_SCHEMA_CLASS': 'rest_framework.schemas.coreapi.AutoSchema',
     'DEFAULT_AUTHENTICATION_CLASSES':  (
@@ -180,3 +187,13 @@ SIMPLE_JWT = {
 }
 
 AUTH_USER_MODEL = 'login.User'
+
+CORS_ALLOW_CREDENTIALS = True
+CSRF_COOKIE_SECURE = False
+CSRF_COOKIE_SAMESITE = 'Lax'
+CSRF_COOKIE_HTTPONLY = False
+SESSION_COOKIE_SAMESITE = 'Lax'
+CORS_EXPOSE_HEADERS = ['Content-Type', 'X-CSRFToken']
+
+TIME_ZONE = 'America/Phoenix'
+USE_TZ = True

@@ -21,7 +21,7 @@ class UserSerializer(serializers.ModelSerializer):
 class UserProfileSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ['first_name', 'last_name', 'email', 'image', 'date_joined', 'coins']
+        fields = ['id', 'first_name', 'last_name', 'email', 'image', 'date_joined', 'coins']
         extra_kwargs = {
             'image': {'required': False}
         }

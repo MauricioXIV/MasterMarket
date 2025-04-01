@@ -44,7 +44,7 @@ const PerfilPage = () => {
         </div>
         
         <div className="mb-4 pb-4 border-b border-gray-200">
-          <span className="font-bold text-gray-600 mr-2">MP Coins:</span>
+          <span className="font-bold text-gray-600 mr-2">MM Coins:</span>
           <span className="text-amber-600 font-bold">{userData.coins}</span>
         </div>
         <button

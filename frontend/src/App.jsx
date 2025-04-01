@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 import { BrowserRouter, Routes, Route, Navigate  } from "react-router-dom"
 import { Toaster } from 'react-hot-toast'
 import Navigation from "./components/Navbar"
@@ -16,6 +16,9 @@ import RegisterPage from "./pages/RegisterPage"
 import EditarPerfil from "./pages/EditarPerfil"
 import NosotrosPage from "./pages/NosotrosPage"
 import { AuthContext } from "./components/UseAuth"
+import ProtectedMoney from "./components/ProtectedMoney"
+import MisCompras from "./pages/MisCompras"
+import { initializeCSRF } from "./api/compras.api"
 
 function App() {
 
@@ -23,10 +26,13 @@ function App() {
     localStorage.getItem('access_token')
   )
 
+    useEffect(() => {
+      initializeCSRF();
+    }, []);
 
   return(
     <AuthContext.Provider value={{ isAuthenticated, setIsAuthenticated }}>
-    <div className="flex flex-wrap justify-center space-x-6">
+    <div className="flex flex-wrap justify-center">
     <CartProvider>
     <BrowserRouter>
     {isAuthenticated && <Navigation />}
@@ -40,8 +46,17 @@ function App() {
           <Route path="/login/productos/:category" element={<ProductsPage/>} />
           <Route path="/login/productos/unico/:id" element={<ProductDetailPage />} />
           <Route path="/login/carrito" element={<Carrito />} />
-          <Route path="/login/compra" element={<CompraPage />} />
-          <Route path="/login/compra/comprobante" element={<ComprobantePage />} />
+          <Route path="/login/compra" element={
+          <ProtectedMoney>
+            <CompraPage />
+          </ProtectedMoney>
+          } />
+          <Route path="/login/compra/comprobante" element={
+            <ProtectedMoney>
+              <ComprobantePage />
+            </ProtectedMoney>
+          } />
+          <Route path="/compras" element={<MisCompras />} />   
           <Route path="/login/perfil" element={<PerfilPage />} />
           <Route path="/login/perfil/editar" element={<EditarPerfil />} />
         </Route>

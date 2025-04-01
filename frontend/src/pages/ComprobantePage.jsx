@@ -51,30 +51,31 @@ const ComprobantePage = () => {
       console.log(total)
 
     return (
-        <div className="text-black font-semibold flex flex-wrap border-4 border-slate-300 shadow-xl shadow-slate-400 rounded-lg w-1/4 mt-8  bg-slate-50">
-            <h2 className="w-full text-center border-2 text-3xl text-lime-500">Tu compra se ha realizado con éxito</h2>
+    
+    <div className="text-black font-semibold flex flex-wrap border-4 border-slate-300 shadow-xl shadow-slate-400 rounded-lg w-1/4 min-w-[325px] mt-8  bg-slate-50">
+    { recibir ? <h2 className="w-full text-center border-2 text-3xl text-lime-500">Tu compra se ha realizado con éxito</h2> : <h2 className="w-full text-center border-2 text-3xl text-red-500">Sin comprobante de compra</h2>}
             <div className="flex w-full flex-wrap">
                 <div className="flex w-full">
-                    <td className="w-1/5 border-2">Nombre:</td>
-                    <td className="w-4/5 text-center border-2">{userData.first_name} {userData.last_name}</td>
+                    <div className="w-1/5 border-2">Nombre:</div>
+                    <div className="w-4/5 text-center border-2">{userData.first_name} {userData.last_name}</div>
                 </div>
                 <div className="flex w-full">
-                    <td className="w-1/5 border-2">Email:</td>
-                    <td className="w-4/5 text-center border-2">{userData.email}</td>
+                    <div className="w-1/5 border-2">Email:</div>
+                    <div className="w-4/5 text-center border-2">{userData.email}</div>
                 </div>
                 <div className="flex w-full">
-                    <td className="w-1/5 border-2">Total de compra:</td>
-                    <td className="w-4/5 text-center border-2">{total}</td>
+                    <div className="w-1/5 border-2">Total de compra:</div>
+                    <div className="w-4/5 text-center border-2">{total}</div>
                 </div>
                 <div className="flex w-full">
-                    <td className="w-1/5 border-2">Método de pago utilizado:</td>
-                    <td className="w-4/5 text-center border-2">MP Coin</td>
+                    <div className="w-1/5 border-2">Método de pago utilizado:</div>
+                    <div className="w-4/5 text-center border-2">MM Coin</div>
                 </div>
                 <div className="flex w-full">
-                    <td className="w-1/5 border-2">Recibirás en:</td>
-                    <td className="w-4/5 text-center border-2">{recibir}</td>
+                    <div className="w-1/5 border-2">Recibirás en:</div>
+                    <div className="w-4/5 text-center border-2">{recibir}</div>
                 </div>
-            </div>
+            </div> 
         </div>
     )
 }
